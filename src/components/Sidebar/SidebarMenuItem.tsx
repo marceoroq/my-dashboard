@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import Icon from "../icons/Icon";
+import Icon from "@/components/Icon";
 
 export interface SidebarMenuItemProps {
-  url?: string;
   text: string;
   iconName: string;
+  url?: string;
 }
 
 export default function SidebarMenuItem({ url = "#", text, iconName }: SidebarMenuItemProps) {

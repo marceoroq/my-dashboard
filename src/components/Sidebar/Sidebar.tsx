@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import Icon from "@/components/icons/Icon";
+import Icon from "@/components/Icon";
 import { SidebarMenuItemProps } from "./SidebarMenuItem";
 import SidebarMenuList from "./SidebarMenuList";
 

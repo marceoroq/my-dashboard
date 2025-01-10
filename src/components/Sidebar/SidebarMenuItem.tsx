@@ -12,18 +12,16 @@ export interface SidebarMenuItemProps {
 }
 
 export default function SidebarMenuItem({ url = "#", text, iconName }: SidebarMenuItemProps) {
-  const pathname = usePathname();
-  const isActive = pathname === url;
+  const currentPath = usePathname();
 
   return (
     <li>
-      <Link
-        className={isActive ? "active" : ""}
-        href={url}>
+      <Link href={url}>
         <button
-          className={`sidebar-menu-item ${
-            isActive ? "sidebar-menu-item-active" : "sidebar-menu-item-common"
-          }`}
+          data-active={currentPath === url}
+          className="sidebar-menu-item 
+                     data-[active=false]:sidebar-menu-item-common
+                     data-[active=true]:sidebar-menu-item-active"
           type="button">
           <Icon name={iconName} />
           <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">

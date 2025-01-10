@@ -4,21 +4,20 @@ import Icon from "@/components/icons/Icon";
 import { SidebarMenuItemProps } from "./SidebarMenuItem";
 import SidebarMenuList from "./SidebarMenuList";
 
+const menuOptions: SidebarMenuItemProps[] = [
+  { url: "/dashboard", text: "dashboard", iconName: "home" },
+  { url: "/profile", text: "profile", iconName: "user" },
+  { text: "tables", iconName: "table" },
+  { text: "notifications", iconName: "bell" },
+];
+
+const authOptions: SidebarMenuItemProps[] = [
+  { text: "sign in", iconName: "signin" },
+  { text: "sign up", iconName: "signup" },
+];
+
 export default function Sidebar() {
-  const menuOptions: SidebarMenuItemProps[] = [
-    { url: "/dashboard", text: "dashboard", iconName: "home" },
-    { url: "/profile", text: "profile", iconName: "user" },
-    { text: "tables", iconName: "table" },
-    { text: "notifications", iconName: "bell" },
-  ];
-
-  const authOptions: SidebarMenuItemProps[] = [
-    { text: "sign in", iconName: "signin" },
-    { text: "sign up", iconName: "signup" },
-  ];
-
   //-translate-x-80
-
   return (
     <aside className="bg-gradient-to-br from-gray-800 to-gray-900 fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0">
       <div className="relative border-b border-white/20">

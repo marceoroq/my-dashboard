@@ -7,7 +7,7 @@ import SidebarMenuList from "./SidebarMenuList";
 const menuOptions: SidebarMenuItemProps[] = [
   { url: "/dashboard", text: "dashboard", iconName: "home" },
   { url: "/profile", text: "profile", iconName: "user" },
-  { text: "tables", iconName: "table" },
+  { url: "/counter", text: "counter", iconName: "calc" },
   { text: "notifications", iconName: "bell" },
 ];
 
@@ -46,8 +46,8 @@ export default function Sidebar() {
       <div className="m-4">
         <SidebarMenuList menuList={menuOptions} />
         <SidebarMenuList
-          menuList={authOptions}
           title="auth pages"
+          menuList={authOptions}
         />
       </div>
     </aside>

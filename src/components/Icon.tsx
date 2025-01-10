@@ -7,6 +7,7 @@ import {
   HiTableCells,
   HiMiniArrowRightOnRectangle,
 } from "react-icons/hi2";
+import { FaCalculator } from "react-icons/fa6";
 
 const iconMap = {
   bell: HiBell,
@@ -16,6 +17,7 @@ const iconMap = {
   signin: HiMiniArrowRightOnRectangle,
   signup: HiUserPlus,
   table: HiTableCells,
+  calc: FaCalculator,
 };
 
 export default function Icon({ name }: { name: string }) {

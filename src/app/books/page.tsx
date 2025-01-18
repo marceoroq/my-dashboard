@@ -13,6 +13,7 @@ export const metadata = {
 
 export default async function BooksPage() {
   const books: Book[] = await getBooks();
+
   return (
     <div className="flex gap-1 flex-wrap">
       {books.map((book: Book) => {

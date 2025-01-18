@@ -6,9 +6,10 @@ import SidebarMenuList from "./SidebarMenuList";
 
 const menuOptions: SidebarMenuItemProps[] = [
   { url: "/dashboard", text: "dashboard", iconName: "home" },
-  { url: "/profile", text: "profile", iconName: "user" },
   { url: "/counter", text: "counter", iconName: "calc" },
-  { text: "notifications", iconName: "bell" },
+  { url: "/books", text: "books", iconName: "book" },
+  // { text: "notifications", iconName: "bell" },
+  // { url: "/profile", text: "profile", iconName: "user" },
 ];
 
 const authOptions: SidebarMenuItemProps[] = [

@@ -2,6 +2,7 @@ import {
   HiBell,
   HiXMark,
   HiHome,
+  HiBookOpen,
   HiUserPlus,
   HiUserCircle,
   HiTableCells,
@@ -18,6 +19,7 @@ const iconMap = {
   signup: HiUserPlus,
   table: HiTableCells,
   calc: FaCalculator,
+  book: HiBookOpen,
 };
 
 export default function Icon({ name }: { name: string }) {

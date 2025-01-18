@@ -1,32 +1,15 @@
-"use client";
+import Counter from "@/components/Counter";
 
-import { useState } from "react";
+export const metadata = {
+  title: "Counter Page",
+  description: "Counter page where we simulate the products shopping cart counter",
+};
 
 export default function CounterPage() {
-  const [counter, setCounter] = useState<number>(10);
-
-  const handleCounterUpdate = (value: number) => {
-    setCounter((prevValue) => prevValue + value);
-  };
-
   return (
     <div className="flex flex-col items-center justify-center w-full h-full grow font-sans">
       <span>Products in Shopping Cart</span>
-      <span className="text-9xl">{counter}</span>
-      <div className="flex gap-2">
-        <button
-          className="middle none center rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-          data-ripple-light="true"
-          onClick={() => handleCounterUpdate(-1)}>
-          -1
-        </button>
-        <button
-          className="middle none center rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-          data-ripple-light="true"
-          onClick={() => handleCounterUpdate(1)}>
-          +1
-        </button>
-      </div>
+      <Counter />
     </div>
   );
 }

@@ -12,18 +12,20 @@ export const metadata = {
 // https://covers.openlibrary.org/b/id/8239781-L.jpg
 
 export default async function BooksPage() {
-  const books: Book[] = await getBooks();
+  const books: Book[] = await getBooks(100);
 
   return (
-    <div className="flex gap-1 flex-wrap">
-      {books.map((book: Book) => {
-        return (
-          <BookCard
-            key={book.key}
-            book={book}
-          />
-        );
-      })}
-    </div>
+    <section>
+      <div className="mx-auto grid grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
+        {books.map((book: Book) => {
+          return (
+            <BookCard
+              key={book.key}
+              book={book}
+            />
+          );
+        })}
+      </div>
+    </section>
   );
 }

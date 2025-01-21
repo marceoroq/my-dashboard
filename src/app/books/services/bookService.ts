@@ -11,5 +11,9 @@ export const getBooks = async (limit = 20, offset = 0): Promise<Book[]> => {
 
   const data: OpenLibraryResponse = await response.json();
 
-  return data.docs;
+  return data.docs.map((book) => ({
+    ...book,
+    // key from api: "/works/OL1234567W", we need "OL1234567W"
+    key: book.key.split("/")[2],
+  }));
 };

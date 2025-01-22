@@ -13,7 +13,7 @@ export default function BookCard({ book }: { book: Book }) {
         <div className="relative flex h-80 w-full justify-center overflow-hidden rounded rounded-r-xl">
           {/* TODO: place generic book cover image when cover_i is undefined or fetch image fails */}
           <Image
-            src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
+            src={`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`}
             width={256}
             height={240}
             alt={altText}
@@ -39,7 +39,9 @@ export default function BookCard({ book }: { book: Book }) {
               className="w-4 h-4"
               aria-hidden="true"
             />
-            {book.title_suggest}
+            <span className="flex-1 truncate  antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-blue-gray-900">
+              {book.title_suggest}
+            </span>
           </h2>
 
           <p className="flex items-center gap-1 mt-1 text-sm text-slate-400">
@@ -48,7 +50,7 @@ export default function BookCard({ book }: { book: Book }) {
               className="w-4 h-4"
               aria-hidden="true"
             />
-            {book.author_name}
+            {book.author_name.join(" - ")}
           </p>
         </div>
       </Link>

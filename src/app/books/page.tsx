@@ -12,7 +12,7 @@ export const metadata = {
 // https://covers.openlibrary.org/b/id/8239781-L.jpg
 
 export default async function BooksPage() {
-  const books: Book[] = await getBooks(100);
+  const books: Book[] = await getBooks();
 
   return (
     <section>

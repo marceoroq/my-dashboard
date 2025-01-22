@@ -30,3 +30,68 @@ export interface Book {
   already_read_count: number;
   subject_facet: string[];
 }
+
+export interface OpenLibraryWorkResponse {
+  title: string;
+  covers: number[];
+  key: string;
+  authors: Author[];
+  type: Key;
+  subjects: string[];
+  description: Type;
+  latest_revision: number;
+  revision: number;
+  created: Type;
+  last_modified: Type;
+}
+
+interface Author {
+  author: Key;
+  type: Key;
+}
+
+interface Key {
+  key: string;
+}
+
+export interface Type {
+  type: string;
+  value: string;
+}
+
+export interface OpenLibraryEditionsResponse {
+  size: number;
+  entries: Entry[];
+}
+
+export interface Entry {
+  publishers?: string[];
+  key: string;
+  authors: Key[];
+  title: string;
+  number_of_pages?: number;
+  languages?: Key[];
+  publish_date?: string;
+  publish_country?: string;
+  latest_revision: number;
+  revision: number;
+  created: Type;
+  last_modified: Type;
+  notes?: Type;
+  covers?: number[];
+  ocaid?: string;
+  publish_places?: string[];
+  by_statement?: string;
+  local_id?: string[];
+  series?: string[];
+  work_titles?: string[];
+  ia_box_id?: string[];
+  ia_loaded_id?: string[];
+  lc_classifications?: string[];
+  lccn?: string[];
+}
+
+export enum TypeEnum {
+  TypeDatetime = "/type/datetime",
+  TypeText = "/type/text",
+}

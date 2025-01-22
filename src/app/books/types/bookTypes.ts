@@ -45,6 +45,11 @@ export interface OpenLibraryWorkResponse {
   last_modified: Type;
 }
 
+export interface WorkBook extends Omit<OpenLibraryWorkResponse, "authors" | "description"> {
+  authors: string[];
+  description: string;
+}
+
 interface Author {
   author: Key;
   type: Key;
@@ -94,4 +99,24 @@ export interface Entry {
 export enum TypeEnum {
   TypeDatetime = "/type/datetime",
   TypeText = "/type/text",
+}
+
+export interface OpenLibraryAuthorResponse {
+  name: string;
+  photos: number[];
+  bio: string;
+  title: string;
+  birth_date: string;
+  created: Type;
+  last_modified: Type;
+}
+
+export interface OpenLibraryRatingResponse {
+  summary: RatingSummary;
+}
+
+export interface RatingSummary {
+  average: number;
+  count: number;
+  sortable: number;
 }

@@ -1,4 +1,11 @@
-import { OpenLibraryResponse, Book, OpenLibraryWorkResponse } from "../types/bookTypes";
+import { OpenLibraryRatingResponse, RatingSummary } from "../types/bookTypes";
+import {
+  Book,
+  WorkBook,
+  OpenLibraryResponse,
+  OpenLibraryWorkResponse,
+  OpenLibraryAuthorResponse,
+} from "../types/bookTypes";
 
 const API_URL = "https://openlibrary.org/";
 
@@ -20,7 +27,7 @@ export const getBooks = async (limit = 20, offset = 0): Promise<Book[]> => {
   }));
 };
 
-export const getBook = async (key: string): Promise<OpenLibraryWorkResponse> => {
+export const getBook = async (key: string): Promise<WorkBook> => {
   const response = await fetch(`${API_URL}works/${key}.json`);
 
   if (!response.ok) {
@@ -29,5 +36,36 @@ export const getBook = async (key: string): Promise<OpenLibraryWorkResponse> => 
 
   const data: OpenLibraryWorkResponse = await response.json();
 
+  const description =
+    typeof data.description === "object" ? data.description.value : data.description;
+
+  return {
+    ...data,
+    description,
+    authors: data.authors.map((author) => author.author.key.split("/")[2]),
+  };
+};
+
+export const getAuthor = async (key: string): Promise<OpenLibraryAuthorResponse> => {
+  const response = await fetch(`${API_URL}authors/${key}.json`);
+
+  if (!response.ok) {
+    throw new Error("Error fetching books");
+  }
+
+  const data: OpenLibraryAuthorResponse = await response.json();
+
   return data;
+};
+
+export const getRanking = async (key: string): Promise<RatingSummary> => {
+  const response = await fetch(`${API_URL}works/${key}/ratings.json`);
+
+  if (!response.ok) {
+    throw new Error("Error fetching books");
+  }
+
+  const data: OpenLibraryRatingResponse = await response.json();
+
+  return data.summary;
 };

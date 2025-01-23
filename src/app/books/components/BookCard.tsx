@@ -8,14 +8,14 @@ export default function BookCard({ book }: { book: Book }) {
   const altText = `Cover of book ${book.title} by ${book.author_name}`;
 
   return (
-    <article className="rounded-xl w-[clamp(190px, 100%, 225px)] bg-white px-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
+    <article className="rounded-xl w-[clamp(12rem, 100%, 14rem)] bg-white px-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
       <Link href={`books/${book.key}`}>
         <div className="-translate-y-4 relative flex h-80 w-full justify-center overflow-hidden rounded-t-xl rounded-b-md shadow-lg">
           {/* TODO: place generic book cover image when cover_i is undefined or fetch image fails */}
           <Image
             src={`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`}
-            width={256}
-            height={240}
+            width={200}
+            height={320}
             alt={altText}
             className="w-full h-full object-cover"
           />

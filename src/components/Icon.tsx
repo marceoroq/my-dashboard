@@ -12,6 +12,7 @@ import {
 } from "react-icons/hi2";
 import { FaCalculator } from "react-icons/fa6";
 import { AiOutlineUser } from "react-icons/ai";
+import { TbLayoutSidebarLeftExpandFilled, TbLayoutSidebarLeftCollapseFilled } from "react-icons/tb";
 
 const iconMap = {
   bell: HiBell,
@@ -26,6 +27,8 @@ const iconMap = {
   book: HiBookOpen,
   star: HiStar,
   bookmark: HiBookmark,
+  opensidebar: TbLayoutSidebarLeftExpandFilled,
+  closesidebar: TbLayoutSidebarLeftCollapseFilled,
 };
 
 export default function Icon({

@@ -31,7 +31,11 @@ export const getBook = async (key: string): Promise<WorkBook> => {
   const response = await fetch(`${API_URL}works/${key}.json`);
 
   if (!response.ok) {
-    throw new Error("Error fetching books");
+    if (response.status === 404) {
+      throw new Error("Not Found");
+    } else {
+      throw new Error("Error fetching book data");
+    }
   }
 
   const data: OpenLibraryWorkResponse = await response.json();
@@ -50,7 +54,11 @@ export const getAuthor = async (key: string): Promise<OpenLibraryAuthorResponse>
   const response = await fetch(`${API_URL}authors/${key}.json`);
 
   if (!response.ok) {
-    throw new Error("Error fetching books");
+    if (response.status === 404) {
+      throw new Error("Not Found");
+    } else {
+      throw new Error("Error fetching author data");
+    }
   }
 
   const data: OpenLibraryAuthorResponse = await response.json();
@@ -62,7 +70,11 @@ export const getRanking = async (key: string): Promise<RatingSummary> => {
   const response = await fetch(`${API_URL}works/${key}/ratings.json`);
 
   if (!response.ok) {
-    throw new Error("Error fetching books");
+    if (response.status === 404) {
+      throw new Error("Not Found");
+    } else {
+      throw new Error("Error fetching ranking data");
+    }
   }
 
   const data: OpenLibraryRatingResponse = await response.json();

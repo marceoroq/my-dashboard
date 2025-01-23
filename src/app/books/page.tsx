@@ -16,7 +16,7 @@ export default async function BooksPage() {
 
   return (
     <section>
-      <div className="mx-auto max-w-screen-2xl mt-4 grid grid-cols-1 gap-x-6 gap-y-10 p-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] justify-items-center mt-8 mx-auto gap-x-2 gap-y-8 max-w-screen-2xl">
         {books.map((book: Book) => {
           return (
             <BookCard

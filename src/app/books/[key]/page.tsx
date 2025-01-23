@@ -30,8 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BookDetailPage({ params }: Props) {
   const key = (await params).key;
   try {
-    const workData = await getBook(key);
-    const ratingData = await getRanking(key);
+    const [workData, ratingData] = await Promise.all([getBook(key), getRanking(key)]);
     const authorData = await getAuthor(workData.authors[0]);
     return (
       <>
@@ -65,11 +64,12 @@ export default async function BookDetailPage({ params }: Props) {
                   )}
                 </span>
               </div>
-
-              <p className="text-gray-600 mt-4">
-                {truncateText(workData.description, 80)}
-                <span className="text-orange-500 cursor-pointer"> View more</span>
-              </p>
+              {workData.description && (
+                <p className="text-gray-600 mt-4">
+                  {truncateText(workData.description, 80)}
+                  <span className="text-orange-500 cursor-pointer"> View more</span>
+                </p>
+              )}
             </div>
 
             <div className="flex justify-between items-center mt-6">

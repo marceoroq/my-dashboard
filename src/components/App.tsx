@@ -9,7 +9,7 @@ export default function App({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const closeSidebar = () => setIsSidebarOpen(false);
   const toggleSidebarStatus = () => {

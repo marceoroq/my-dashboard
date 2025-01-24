@@ -1,8 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 
-import { Book } from "../types/bookTypes";
 import Icon from "@/components/Icon";
+import { Book } from "@/app/books/types/bookTypes";
+
+import defaultBookCover from "@/assets/images/default-book-cover.png";
 
 export default function BookCard({ book }: { book: Book }) {
   const altText = `Cover of book ${book.title} by ${book.author_name}`;
@@ -11,14 +13,22 @@ export default function BookCard({ book }: { book: Book }) {
     <article className="rounded-xl w-52 bg-white px-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
       <Link href={`books/${book.key}`}>
         <div className="-translate-y-4 relative flex h-80 w-full justify-center overflow-hidden rounded-t-xl rounded-b-md shadow-lg">
-          {/* TODO: place generic book cover image when cover_i is undefined or fetch image fails */}
-          <Image
-            src={`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`}
-            width={200}
-            height={320}
-            alt={altText}
-            className="w-full h-full object-cover"
-          />
+          {book.cover_i ? (
+            <Image
+              src={`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`}
+              width={200}
+              height={320}
+              alt={altText}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <Image
+              src={defaultBookCover}
+              alt="book cover"
+              className="w-full h-full object-cover"
+            />
+          )}
+
           {book.ratings_average && (
             <div className="absolute backdrop-blur-sm bottom-3 right-3 inline-flex items-center rounded-lg bg-black/25 p-2 shadow-md">
               <Icon

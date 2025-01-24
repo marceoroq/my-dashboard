@@ -9,7 +9,7 @@ import {
 
 const API_URL = "https://openlibrary.org/";
 
-export const getBooks = async (limit = 20, offset = 0): Promise<Book[]> => {
+export const getBooks = async (limit = 50, offset = 0): Promise<Book[]> => {
   const response = await fetch(
     `${API_URL}search.json?author=Robin+Cook&limit=${limit}&offset=${offset}`
   );

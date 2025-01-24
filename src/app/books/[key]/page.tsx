@@ -3,13 +3,23 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import Icon from "@/components/Icon";
-
-import { getBook, getAuthor, getRanking } from "@/app/books/services/bookService";
+import { Book } from "@/app/books/types/bookTypes";
 import { truncateText } from "@/utils/truncateText";
+import { getBooks, getBook, getAuthor, getRanking } from "@/app/books/services/bookService";
+
+import defaultBookCover from "@/assets/images/default-book-cover.png";
 
 type Props = {
   params: Promise<{ key: string }>;
 };
+
+export async function generateStaticParams() {
+  const books: Book[] = await getBooks();
+
+  return books.map((book) => ({
+    key: book.key,
+  }));
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const key = (await params).key;
@@ -35,19 +45,29 @@ export default async function BookDetailPage({ params }: Props) {
     return (
       <>
         <div className="flex flex-col md:flex-row items-start gap-6 mt-4 p-10 max-w-4xl mx-auto bg-white font-sans shadow-lg rounded-xl">
-          <Image
-            src={`https://covers.openlibrary.org/b/id/${workData.covers[0]}-L.jpg`}
-            width={256}
-            height={240}
-            alt="book cover"
-            className="w-1/3 rounded-lg"
-          />
+          {workData.covers?.[0] ? (
+            <Image
+              src={`https://covers.openlibrary.org/b/id/${workData.covers[0]}-L.jpg`}
+              width={256}
+              height={240}
+              alt="book cover"
+              className="w-1/3 rounded-lg"
+            />
+          ) : (
+            <Image
+              src={defaultBookCover}
+              alt="book cover"
+              className="w-1/3 rounded-lg"
+            />
+          )}
 
           <div className="flex flex-col justify-between flex-grow">
             <div>
               <h2 className="text-2xl font-bold text-gray-800">{workData.title}</h2>
               <p className="text-gray-600 mt-2">By {authorData.name}</p>
-              <p className="text-gray-500 text-sm">{workData.subjects.join(" - ")}</p>
+              {workData.subjects && (
+                <p className="text-gray-500 text-sm">{workData.subjects.join(" - ")}</p>
+              )}
 
               <div className="flex mt-3">
                 <div className={`flex ${ratingData.average ? "text-orange-500" : "text-gray-500"}`}>

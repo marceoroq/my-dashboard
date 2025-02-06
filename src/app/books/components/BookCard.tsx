@@ -1,51 +1,31 @@
 import Link from "next/link";
-import Image from "next/image";
 
-import Icon from "@/components/Icon";
 import { Book } from "@/app/books/types/bookTypes";
-
-import defaultBookCover from "@/assets/images/default-book-cover.png";
+import { formatStrings } from "@/utils/formatStrings";
+import FavoriteBudget from "./FavoriteBudget";
+import RatingBudget from "./RatingBudget";
+import BookCover from "./BookCover";
 
 export default function BookCard({ book }: { book: Book }) {
   const altText = `Cover of book ${book.title} by ${book.author_name}`;
+  const url = `books/${formatStrings(book.title)}-${formatStrings(book.author_name)}-${book.key}`;
 
   return (
     <article className="rounded-xl w-52 bg-white px-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
-      <Link href={`books/${book.key}`}>
+      <Link href={url}>
         <div className="-translate-y-4 relative flex h-80 w-full justify-center overflow-hidden rounded-t-xl rounded-b-md shadow-lg">
-          {book.cover_i ? (
-            <Image
-              src={`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`}
-              width={200}
-              height={320}
-              alt={altText}
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <Image
-              src={defaultBookCover}
-              alt="book cover"
-              className="w-full h-full object-cover"
-            />
-          )}
-
-          {book.ratings_average && (
-            <div className="absolute backdrop-blur-sm bottom-3 right-3 inline-flex items-center rounded-lg bg-black/25 p-2 shadow-md">
-              <Icon
-                name="star"
-                className="text-yellow-400"
-              />
-              <span className="ml-1 font-semibold text-sm text-white">
-                {book.ratings_average?.toFixed(1)}
-              </span>
-            </div>
-          )}
+          <FavoriteBudget />
+          <BookCover
+            cover={book.cover_i}
+            altText={altText}
+          />
+          {book.ratings_average && <RatingBudget rating={book.ratings_average?.toFixed(1)} />}
         </div>
 
         <div className="px-2 -translate-y-2">
           <h2 className="flex items-center gap-1 text-slate-700 font-bold">
             <span className="flex-1 truncate antialiased tracking-normal font-sans text-md font-semibold leading-relaxed text-blue-gray-900">
-              {book.title_suggest}
+              {book.title}
             </span>
           </h2>
 

@@ -1,14 +1,15 @@
 "use client";
 
 import Icon from "@/components/Icon";
+import { useSidebar } from "@/context/SidebarContext";
 
-export default function Navbar({
-  isSidebarOpen,
-  toggleSidebarStatus,
-}: {
-  isSidebarOpen: boolean;
-  toggleSidebarStatus: VoidFunction;
-}) {
+export default function Navbar() {
+  const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
+
+  const toggleSidebarStatus = () => {
+    setIsSidebarOpen((prevStatus) => !prevStatus);
+  };
+
   return (
     <nav className="block w-full max-w-full bg-transparent text-white shadow-none rounded-xl transition-all px-0 py-1">
       <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">

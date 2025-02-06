@@ -4,25 +4,27 @@ import { notFound } from "next/navigation";
 
 import Icon from "@/components/Icon";
 import { Book } from "@/app/books/types/bookTypes";
-import { truncateText } from "@/utils/truncateText";
+import { truncateText, formatStrings } from "@/utils";
 import { getBooks, getBook, getAuthor, getRanking } from "@/app/books/services/bookService";
 
 import defaultBookCover from "@/assets/images/default-book-cover.png";
 
 type Props = {
-  params: Promise<{ key: string }>;
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
   const books: Book[] = await getBooks();
 
   return books.map((book) => ({
-    key: book.key,
+    slug: `${formatStrings(book.title)}-${formatStrings(book.author_name)}-${book.key}`,
   }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const key = (await params).key;
+  const slug = (await params).slug;
+  const key: string = slug.split("-").at(-1)!;
+
   try {
     const workData = await getBook(key);
     return {
@@ -38,14 +40,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BookDetailPage({ params }: Props) {
-  const key = (await params).key;
+  const slug = (await params).slug;
+  const key = slug.split("-").at(-1)!;
+
   try {
     const [workData, ratingData] = await Promise.all([getBook(key), getRanking(key)]);
     const authorData = await getAuthor(workData.authors[0]);
     return (
       <>
         <div className="flex flex-col md:flex-row items-start gap-6 mt-4 p-10 max-w-4xl mx-auto bg-white font-sans shadow-lg rounded-xl">
-          {workData.covers?.[0] ? (
+          {Number(workData.covers?.[0]) > 0 ? (
             <Image
               src={`https://covers.openlibrary.org/b/id/${workData.covers[0]}-L.jpg`}
               width={256}

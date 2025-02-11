@@ -11,6 +11,7 @@ const menuOptions: SidebarMenuItemProps[] = [
   { url: "/dashboard", text: "dashboard", iconName: "home" },
   { url: "/counter", text: "counter", iconName: "calc" },
   { url: "/books", text: "books", iconName: "book" },
+  { url: "/favorites", text: "favorites", iconName: "outheart" },
   // { text: "notifications", iconName: "bell" },
   // { url: "/profile", text: "profile", iconName: "user" },
 ];

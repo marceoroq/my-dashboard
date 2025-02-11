@@ -1,12 +1,10 @@
 import Link from "next/link";
 
-import { Book } from "@/app/books/types/bookTypes";
+import { Book } from "@/types/bookTypes";
 import { formatStrings } from "@/utils/formatStrings";
-import FavoriteBudget from "./FavoriteBudget";
-import RatingBudget from "./RatingBudget";
-import BookCover from "./BookCover";
+import { FavoriteBudget, RatingBudget, BookCover } from "@/components/Book";
 
-export default function BookCard({ book }: { book: Book }) {
+export function BookCard({ book }: { book: Book }) {
   const altText = `Cover of book ${book.title} by ${book.author_name}`;
   const url = `books/${formatStrings(book.title)}-${formatStrings(book.author_name)}-${book.key}`;
 

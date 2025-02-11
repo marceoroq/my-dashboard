@@ -1,8 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
-import Image from "next/image";
 import defaultBookCover from "@/assets/images/default-book-cover.png";
 
 interface BookCover {
@@ -10,7 +10,7 @@ interface BookCover {
   altText: string;
 }
 
-export default function BookCover({ cover, altText }: BookCover) {
+export function BookCover({ cover, altText }: BookCover) {
   const [imageSrc, setImageSrc] = useState(
     cover ? `https://covers.openlibrary.org/b/id/${cover}-L.jpg` : defaultBookCover
   );

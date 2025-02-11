@@ -3,9 +3,9 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import Icon from "@/components/Icon";
-import { Book } from "@/app/books/types/bookTypes";
+import { Book } from "@/types/bookTypes";
 import { truncateText, formatStrings } from "@/utils";
-import { getBooks, getBook, getAuthor, getRanking } from "@/app/books/services/bookService";
+import { getBooks, getBook, getAuthor, getRanking } from "@/services/bookService";
 
 import defaultBookCover from "@/assets/images/default-book-cover.png";
 

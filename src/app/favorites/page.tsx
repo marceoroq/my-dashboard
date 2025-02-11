@@ -1,5 +1,5 @@
-import { Book } from "../../types/bookTypes";
-import { getBooks } from "../../services/bookService";
+import { Book } from "@/types/bookTypes";
+import { getBooks } from "@/services/bookService";
 import { BookGrid, BookCard } from "@/components/Book";
 
 export const metadata = {
@@ -9,7 +9,7 @@ export const metadata = {
 
 // https://covers.openlibrary.org/b/id/8239781-L.jpg
 
-export default async function BooksPage() {
+export default async function FavoritesPage() {
   const books: Book[] = await getBooks();
 
   return (

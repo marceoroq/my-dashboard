@@ -1,10 +1,9 @@
 "use client";
 
 import Icon from "@/components/Icon";
-
 import { useBook } from "@/context/BookContext";
 
-export default function FavoriteBudget({ bookId }: { bookId: string }) {
+export function FavoriteBudget({ bookId }: { bookId: string }) {
   const { isFavorite, toggleFavoriteBook } = useBook();
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {

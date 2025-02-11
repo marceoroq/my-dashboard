@@ -1,8 +1,10 @@
 "use client";
 
+import { SidebarProvider } from "@/context/SidebarContext";
+import { BookProvider } from "@/context/BookContext";
+
 import Main from "./Main";
 import Sidebar from "./Sidebar/Sidebar";
-import { SidebarProvider } from "@/context/SidebarContext";
 
 export default function Providers({
   children,
@@ -11,8 +13,10 @@ export default function Providers({
 }>) {
   return (
     <SidebarProvider>
-      <Sidebar />
-      <Main>{children}</Main>
+      <BookProvider>
+        <Sidebar />
+        <Main>{children}</Main>
+      </BookProvider>
     </SidebarProvider>
   );
 }

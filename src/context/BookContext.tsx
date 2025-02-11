@@ -4,6 +4,7 @@ import { createContext, useContext, useState, ReactNode } from "react";
 
 interface BookContextType {
   favoritesBooks: string[];
+  isFavorite: (bookId: string) => boolean;
   toggleFavoriteBook: (bookId: string) => void;
 }
 
@@ -24,8 +25,10 @@ export const BookProvider = ({ children }: BookProviderProps) => {
     );
   };
 
+  const isFavorite = (bookId: string): boolean => favoritesBooks.includes(bookId);
+
   return (
-    <BookContext.Provider value={{ favoritesBooks, toggleFavoriteBook }}>
+    <BookContext.Provider value={{ favoritesBooks, isFavorite, toggleFavoriteBook }}>
       {children}
     </BookContext.Provider>
   );
@@ -34,7 +37,7 @@ export const BookProvider = ({ children }: BookProviderProps) => {
 export const useBook = (): BookContextType => {
   const context = useContext(BookContext);
   if (!context) {
-    throw new Error("useSidebar must be used within a SidebarProvider");
+    throw new Error("useBook must be used within a SidebarProvider");
   }
   return context;
 };

@@ -5,7 +5,12 @@ import { useState } from "react";
 import Image from "next/image";
 import defaultBookCover from "@/assets/images/default-book-cover.png";
 
-export default function BookCover({ cover, altText }) {
+interface BookCover {
+  cover: number;
+  altText: string;
+}
+
+export default function BookCover({ cover, altText }: BookCover) {
   const [imageSrc, setImageSrc] = useState(
     cover ? `https://covers.openlibrary.org/b/id/${cover}-L.jpg` : defaultBookCover
   );

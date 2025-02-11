@@ -1,6 +1,6 @@
 import Icon from "@/components/Icon";
 
-export default function RatingBudget({ rating }) {
+export default function RatingBudget({ rating }: { rating: string }) {
   return (
     <div className="absolute backdrop-blur-sm bottom-3 right-3 inline-flex items-center rounded-lg bg-black/25 p-2 shadow-md">
       <Icon

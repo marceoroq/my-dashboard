@@ -7,7 +7,7 @@ import Icon from "@/components/Icon";
 export default function FavoriteBudget() {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const handleClick = (event) => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     event.preventDefault();
     setIsFavorite((prevValue) => !prevValue);
   };

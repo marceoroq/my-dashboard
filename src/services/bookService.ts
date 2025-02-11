@@ -1,9 +1,10 @@
-import { OpenLibraryRatingResponse, RatingSummary } from "../types/bookTypes";
 import {
   Book,
   WorkBook,
+  RatingSummary,
   OpenLibraryResponse,
   OpenLibraryWorkResponse,
+  OpenLibraryRatingResponse,
   OpenLibraryAuthorResponse,
 } from "../types/bookTypes";
 
@@ -45,6 +46,7 @@ export const getBook = async (key: string): Promise<WorkBook> => {
 
   return {
     ...data,
+    key: data.key.split("/")[2],
     description,
     authors: data.authors.map((author) => author.author.key.split("/")[2]),
   };

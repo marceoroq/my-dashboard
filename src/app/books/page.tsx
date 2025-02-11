@@ -1,5 +1,5 @@
-import { Book } from "../../types/bookTypes";
-import { getBooks } from "../../services/bookService";
+import { Book } from "@/types/bookTypes";
+import { getBooks } from "@/services/bookService";
 import { BookGrid, BookCard } from "@/components/Book";
 
 export const metadata = {

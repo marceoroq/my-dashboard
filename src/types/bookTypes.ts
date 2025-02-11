@@ -9,26 +9,20 @@ export interface OpenLibraryResponse {
 }
 
 export interface Book {
-  author_key: string[];
-  author_name: string[];
-  cover_i: number;
-  first_publish_year: number;
-  first_sentence: string[];
-  format: string[];
   key: string;
-  language: string[];
-  number_of_pages_median: number;
-  publish_place: string[];
+  author_name: string[];
   title: string;
-  title_sort: string;
-  title_suggest: string;
-  type: string;
-  subject: string[];
-  ratings_average: number;
-  want_to_read_count: number;
-  currently_reading_count: number;
-  already_read_count: number;
-  subject_facet: string[];
+  cover_i: number;
+  first_publish_year?: number;
+  author_key?: string[];
+  language?: string[];
+  publish_place?: string[];
+  type?: string;
+  subject?: string[];
+  ratings_average?: number;
+  want_to_read_count?: number;
+  currently_reading_count?: number;
+  already_read_count?: number;
 }
 
 export interface OpenLibraryWorkResponse {

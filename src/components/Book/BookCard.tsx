@@ -12,7 +12,7 @@ export function BookCard({ book }: { book: Book }) {
     <article className="rounded-xl w-52 bg-white px-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
       <Link href={url}>
         <div className="-translate-y-4 relative flex h-80 w-full justify-center overflow-hidden rounded-t-xl rounded-b-md shadow-lg">
-          <FavoriteBudget bookId={book.key} />
+          <FavoriteBudget book={book} />
           <BookCover
             cover={book.cover_i}
             altText={altText}

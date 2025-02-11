@@ -1,6 +1,4 @@
-import { Book } from "@/types/bookTypes";
-import { getBooks } from "@/services/bookService";
-import { BookGrid, BookCard } from "@/components/Book";
+import { BookGrid, FavoriteBooks } from "@/components/Book";
 
 export const metadata = {
   title: "Books Page",
@@ -10,19 +8,10 @@ export const metadata = {
 // https://covers.openlibrary.org/b/id/8239781-L.jpg
 
 export default async function FavoritesPage() {
-  const books: Book[] = await getBooks();
-
   return (
     <section>
       <BookGrid>
-        {books.map((book: Book) => {
-          return (
-            <BookCard
-              key={book.key}
-              book={book}
-            />
-          );
-        })}
+        <FavoriteBooks />
       </BookGrid>
     </section>
   );

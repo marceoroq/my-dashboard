@@ -30,7 +30,9 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`fixed w-full lg:w-0 h-full z-10 ${!isSidebarOpen && "pointer-events-none w-0"}`}
+      className={`fixed w-full lg:w-0 h-full z-10 ${
+        !isSidebarOpen && "pointer-events-none w-0 xl:pointer-events-auto"
+      }`}
       onClick={handleClose}>
       <aside
         className={`bg-gradient-to-br from-gray-800 to-gray-900 fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 overflow-y-scroll rounded-xl transition-transform duration-300 xl:translate-x-0 ${

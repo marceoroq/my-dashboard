@@ -1,11 +1,14 @@
 "use client";
 
 import { Book } from "../../types/bookTypes";
-import { BookCard, EmptyFavoriteBooks } from "@/components/Book";
 import { useBook } from "@/context/BookContext";
+import { BookCard, EmptyFavoriteBooks } from "@/components/Book";
+import Loading from "@/components/Loading";
 
 export function FavoriteBooks() {
-  const { favoriteBooks: books } = useBook();
+  const { favoriteBooks: books, isLoadingFavorites } = useBook();
+
+  if (isLoadingFavorites) return <Loading />;
 
   if (books.length === 0) return <EmptyFavoriteBooks />;
 

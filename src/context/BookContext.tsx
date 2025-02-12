@@ -7,6 +7,7 @@ interface BookContextType {
   favoriteBooks: Book[];
   isFavorite: (bookId: string) => boolean;
   toggleFavoriteBook: (book: Book) => void;
+  isLoadingFavorites: boolean;
 }
 
 const BookContext = createContext<BookContextType | null>(null);
@@ -16,12 +17,14 @@ interface BookProviderProps {
 }
 
 export const BookProvider = ({ children }: BookProviderProps) => {
-  const [favoritesMap, setFavoritesMap] = useState(() => {
+  const [favoritesMap, setFavoritesMap] = useState<Map<string, Book>>(new Map());
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
     const storedFavoriteBooks = localStorage.getItem("favorite-books");
-    return storedFavoriteBooks
-      ? new Map<string, Book>(JSON.parse(storedFavoriteBooks))
-      : new Map<string, Book>();
-  });
+    if (storedFavoriteBooks) setFavoritesMap(new Map(JSON.parse(storedFavoriteBooks)));
+    setIsLoading(false);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("favorite-books", JSON.stringify(Array.from(favoritesMap)));
@@ -46,6 +49,7 @@ export const BookProvider = ({ children }: BookProviderProps) => {
         favoriteBooks,
         isFavorite,
         toggleFavoriteBook,
+        isLoadingFavorites: isLoading,
       }}>
       {children}
     </BookContext.Provider>

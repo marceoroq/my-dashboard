@@ -25,14 +25,14 @@ export function BookCover({ cover, altText }: BookCover) {
       width={200}
       height={320}
       alt={altText}
-      className="w-full h-full object-cover"
+      className="w-full h-full object-cover rounded-md"
       onError={handleError}
     />
   ) : (
     <Image
       src={defaultBookCover}
       alt="book cover"
-      className="w-full h-full object-cover"
+      className="w-full h-full object-cover rounded-lg"
     />
   );
 }

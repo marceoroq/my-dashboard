@@ -5,7 +5,7 @@ import { BookCard, EmptyFavoriteBooks } from "@/components/Book";
 import { useBook } from "@/context/BookContext";
 
 export function FavoriteBooks() {
-  const { favoritesBooks: books } = useBook();
+  const { favoriteBooks: books } = useBook();
 
   if (books.length === 0) return <EmptyFavoriteBooks />;
 

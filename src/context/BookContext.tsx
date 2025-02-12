@@ -1,10 +1,10 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useMemo, useEffect } from "react";
 import { Book } from "@/types/bookTypes";
 
 interface BookContextType {
-  favoritesBooks: Book[];
+  favoriteBooks: Book[];
   isFavorite: (bookId: string) => boolean;
   toggleFavoriteBook: (book: Book) => void;
 }
@@ -16,7 +16,16 @@ interface BookProviderProps {
 }
 
 export const BookProvider = ({ children }: BookProviderProps) => {
-  const [favoritesMap, setFavoritesMap] = useState(new Map<string, Book>());
+  const [favoritesMap, setFavoritesMap] = useState(() => {
+    const storedFavoriteBooks = localStorage.getItem("favorite-books");
+    return storedFavoriteBooks
+      ? new Map<string, Book>(JSON.parse(storedFavoriteBooks))
+      : new Map<string, Book>();
+  });
+
+  useEffect(() => {
+    localStorage.setItem("favorite-books", JSON.stringify(Array.from(favoritesMap)));
+  }, [favoritesMap]);
 
   const toggleFavoriteBook = (book: Book): void => {
     setFavoritesMap((prevFavorites) => {
@@ -29,10 +38,12 @@ export const BookProvider = ({ children }: BookProviderProps) => {
 
   const isFavorite = (bookId: string): boolean => favoritesMap.has(bookId);
 
+  const favoriteBooks = useMemo(() => Array.from(favoritesMap.values()), [favoritesMap]);
+
   return (
     <BookContext.Provider
       value={{
-        favoritesBooks: Array.from(favoritesMap.values()),
+        favoriteBooks,
         isFavorite,
         toggleFavoriteBook,
       }}>
@@ -44,7 +55,7 @@ export const BookProvider = ({ children }: BookProviderProps) => {
 export const useBook = (): BookContextType => {
   const context = useContext(BookContext);
   if (!context) {
-    throw new Error("useBook must be used within a SidebarProvider");
+    throw new Error("useBook must be used within a BookProvider");
   }
   return context;
 };

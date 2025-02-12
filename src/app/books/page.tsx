@@ -1,29 +1,22 @@
 import { Book } from "@/types/bookTypes";
 import { getBooks } from "@/services/bookService";
-import { BookGrid, BookCard } from "@/components/Book";
+import { BookList } from "@/components/Book";
 
 export const metadata = {
   title: "Books Page",
   description: "Books Page",
 };
 
+const INITIAL_NUMBER_OF_BOOKS = 24;
+
 // https://covers.openlibrary.org/b/id/8239781-L.jpg
 
 export default async function BooksPage() {
-  const books: Book[] = await getBooks();
+  const books: Book[] = await getBooks(INITIAL_NUMBER_OF_BOOKS, 0);
 
   return (
     <section>
-      <BookGrid>
-        {books.map((book: Book) => {
-          return (
-            <BookCard
-              key={book.key}
-              book={book}
-            />
-          );
-        })}
-      </BookGrid>
+      <BookList initialBooks={books} />
     </section>
   );
 }

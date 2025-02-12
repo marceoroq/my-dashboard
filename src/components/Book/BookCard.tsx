@@ -9,9 +9,9 @@ export function BookCard({ book }: { book: Book }) {
   const url = `books/${formatStrings(book.title)}-${formatStrings(book.author_name)}-${book.key}`;
 
   return (
-    <article className="rounded-xl w-52 bg-white px-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
+    <article className="rounded-xl w-40 sm:w-52 bg-white px-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
       <Link href={url}>
-        <div className="-translate-y-4 relative flex h-80 w-full justify-center overflow-hidden rounded-t-xl rounded-b-md shadow-lg">
+        <div className="-translate-y-4 relative flex h-56 sm:h-80 w-full justify-center overflow-hidden rounded-t-xl rounded-b-md shadow-lg">
           <FavoriteBudget book={book} />
           <BookCover
             cover={book.cover_i}

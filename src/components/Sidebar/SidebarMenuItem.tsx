@@ -15,6 +15,13 @@ export default function SidebarMenuItem({ url = "#", text, iconName }: SidebarMe
   const currentPath = usePathname();
   const { setIsSidebarOpen } = useSidebar();
 
+  const handleClick = () => {
+    const screenWidth = window.innerWidth;
+    // We only want the sidebar to close when clicking on one of the menu
+    // options on small screens, where the sidebar overlaps the content.
+    if (screenWidth < 1024) setIsSidebarOpen(false);
+  };
+
   return (
     <li>
       <Link href={url}>
@@ -24,7 +31,7 @@ export default function SidebarMenuItem({ url = "#", text, iconName }: SidebarMe
                      data-[active=false]:sidebar-menu-item-common
                      data-[active=true]:sidebar-menu-item-active"
           type="button"
-          onClick={() => setIsSidebarOpen(false)}>
+          onClick={handleClick}>
           <Icon name={iconName} />
           <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
             {text}

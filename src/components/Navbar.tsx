@@ -1,10 +1,12 @@
 "use client";
 
-import Icon from "@/components/Icon";
+import { usePathname } from "next/navigation";
 import { useSidebar } from "@/context/SidebarContext";
+import Icon from "@/components/Icon";
 
 export default function Navbar() {
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
+  const pathname = usePathname().split("/").at(-1);
 
   const toggleSidebarStatus = () => {
     setIsSidebarOpen((prevStatus) => !prevStatus);
@@ -21,7 +23,7 @@ export default function Navbar() {
               <li className="flex items-center text-blue-gray-900 antialiased font-sans text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-light-blue-500">
                 <a href="#">
                   <p className="block antialiased font-sans text-sm leading-normal text-blue-900 font-normal opacity-50 transition-all hover:text-blue-500 hover:opacity-100">
-                    dashboard
+                    home
                   </p>
                 </a>
                 <span className="text-gray-500 text-sm antialiased font-sans font-normal leading-normal mx-2 pointer-events-none select-none">
@@ -30,13 +32,13 @@ export default function Navbar() {
               </li>
               <li className="flex items-center text-blue-900 antialiased font-sans text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-blue-500">
                 <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">
-                  home
+                  {pathname}
                 </p>
               </li>
             </ol>
           </nav>
           <h6 className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-gray-900">
-            home
+            {pathname}
           </h6>
         </div>
         <div className="flex items-center">

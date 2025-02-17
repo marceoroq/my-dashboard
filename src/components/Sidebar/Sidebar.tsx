@@ -8,10 +8,10 @@ import { SidebarMenuItemProps } from "./SidebarMenuItem";
 import { useSidebar } from "@/context/SidebarContext";
 
 const menuOptions: SidebarMenuItemProps[] = [
-  { url: "/dashboard", text: "dashboard", iconName: "home" },
-  { url: "/counter", text: "counter", iconName: "calc" },
   { url: "/books", text: "books", iconName: "book" },
   { url: "/favorites", text: "favorites", iconName: "heart" },
+  { url: "/dashboard", text: "dashboard", iconName: "home" },
+  // { url: "/counter", text: "counter", iconName: "calc" },
 ];
 
 // const authOptions: SidebarMenuItemProps[] = [

@@ -5,7 +5,12 @@ import { notFound } from "next/navigation";
 import Icon from "@/components/Icon";
 import { Book } from "@/types/bookTypes";
 import { truncateText, formatStrings } from "@/utils";
-import { getBooks, getBook, getAuthor, getRanking } from "@/services/bookService";
+import {
+  getBooks,
+  getBook,
+  getAuthor,
+  getRanking,
+} from "@/services/bookService";
 
 import defaultBookCover from "@/assets/images/default-book-cover.png";
 
@@ -14,11 +19,13 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const books: Book[] = await getBooks();
+  const books: Book[] = await getBooks(20);
 
-  return books.map((book) => ({
+  const bookSlugs = books.map((book) => ({
     slug: `${formatStrings(book.title)}-${formatStrings(book.author_name)}-${book.key}`,
   }));
+
+  return bookSlugs;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -44,7 +51,11 @@ export default async function BookDetailPage({ params }: Props) {
   const key = slug.split("-").at(-1)!;
 
   try {
-    const [workData, ratingData] = await Promise.all([getBook(key), getRanking(key)]);
+    const [workData, ratingData] = await Promise.all([
+      getBook(key),
+      getRanking(key),
+    ]);
+
     const authorData = await getAuthor(workData.authors[0]);
     return (
       <>
@@ -67,21 +78,29 @@ export default async function BookDetailPage({ params }: Props) {
 
           <div className="flex flex-col justify-between flex-grow">
             <div>
-              <h2 className="text-2xl font-bold text-gray-800">{workData.title}</h2>
+              <h2 className="text-2xl font-bold text-gray-800">
+                {workData.title}
+              </h2>
               <p className="text-gray-600 mt-2">By {authorData.name}</p>
               {workData.subjects && (
-                <p className="text-gray-500 text-sm">{workData.subjects.join(" - ")}</p>
+                <p className="text-gray-500 text-sm">
+                  {workData.subjects.join(" - ")}
+                </p>
               )}
 
               <div className="flex mt-3">
-                <div className={`flex ${ratingData.average ? "text-orange-500" : "text-gray-500"}`}>
+                <div
+                  className={`flex ${ratingData.average ? "text-orange-500" : "text-gray-500"}`}
+                >
                   <Icon name="star" />
                 </div>
                 <span className="ml-1 text-gray-500">
                   {ratingData.average ? (
                     <>
-                      <span className="font-semibold">{ratingData.average.toFixed(1)}</span> (
-                      {ratingData.count} reviews)
+                      <span className="font-semibold">
+                        {ratingData.average.toFixed(1)}
+                      </span>
+                      ({ratingData.count} reviews)
                     </>
                   ) : (
                     "No Ranked"
@@ -91,7 +110,9 @@ export default async function BookDetailPage({ params }: Props) {
               {workData.description && (
                 <p className="text-gray-600 mt-4">
                   {truncateText(workData.description, 80)}
-                  <span className="text-orange-500 cursor-pointer"> View more</span>
+                  <span className="text-orange-500 cursor-pointer">
+                    View more
+                  </span>
                 </p>
               )}
             </div>
@@ -106,7 +127,8 @@ export default async function BookDetailPage({ params }: Props) {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  className="w-6 h-6 text-orange-500">
+                  className="w-6 h-6 text-orange-500"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

@@ -12,7 +12,7 @@ const API_URL = "https://openlibrary.org/";
 
 export const getBooks = async (limit = 80, offset = 0): Promise<Book[]> => {
   const response = await fetch(
-    `${API_URL}search.json?author=Robin+Cook&limit=${limit}&offset=${offset}`
+    `${API_URL}search.json?author=Robin+Cook&limit=${limit}&offset=${offset}`,
   );
 
   if (!response.ok) {
@@ -35,14 +35,16 @@ export const getBook = async (key: string): Promise<WorkBook> => {
     if (response.status === 404) {
       throw new Error("Not Found");
     } else {
-      throw new Error("Error fetching book data");
+      throw new Error("Error fetching book data: " + response.statusText);
     }
   }
 
   const data: OpenLibraryWorkResponse = await response.json();
 
   const description =
-    typeof data.description === "object" ? data.description.value : data.description;
+    typeof data.description === "object"
+      ? data.description.value
+      : data.description;
 
   return {
     ...data,
@@ -52,7 +54,9 @@ export const getBook = async (key: string): Promise<WorkBook> => {
   };
 };
 
-export const getAuthor = async (key: string): Promise<OpenLibraryAuthorResponse> => {
+export const getAuthor = async (
+  key: string,
+): Promise<OpenLibraryAuthorResponse> => {
   const response = await fetch(`${API_URL}authors/${key}.json`);
 
   if (!response.ok) {
@@ -75,7 +79,7 @@ export const getRanking = async (key: string): Promise<RatingSummary> => {
     if (response.status === 404) {
       throw new Error("Not Found");
     } else {
-      throw new Error("Error fetching ranking data");
+      throw new Error("Error fetching ranking data: " + response.statusText);
     }
   }
 

@@ -19,7 +19,7 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const books: Book[] = await getBooks(20);
+  const books: Book[] = await getBooks(10);
 
   const bookSlugs = books.map((book) => ({
     slug: `${formatStrings(book.title)}-${formatStrings(book.author_name)}-${book.key}`,
